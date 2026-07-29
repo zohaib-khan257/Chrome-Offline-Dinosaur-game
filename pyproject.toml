@@ -1,0 +1,18 @@
+[project]
+name = "django-dinosaur-game"
+version = "1.0.0"
+description = "A Django implementation of the offline dinosaur game."
+requires-python = ">=3.12"
+dependencies = ["Django>=5.2,<5.3"]
+
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+exclude = ["migrations"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]

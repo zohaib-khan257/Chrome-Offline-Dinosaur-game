@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Django Dino Run{% endblock %}
+
+{% block content %}
+<main class="page-shell">
+  <section class="game-card" aria-labelledby="game-title">
+    <header class="game-header">
+      <div>
+        <p class="eyebrow">Django static files demo</p>
+        <h1 id="game-title">Dino Run</h1>
+      </div>
+      <button class="theme-toggle" type="button" aria-label="Toggle day and night mode">
+        <span aria-hidden="true">☼</span>
+      </button>
+    </header>
+
+    <div class="scoreboard" aria-live="polite">
+      <span>HI <strong id="high-score">00000</strong></span>
+      <span><strong id="score">00000</strong></span>
+    </div>
+
+    <div id="game-stage" class="game-stage" tabindex="0" aria-label="Dinosaur running game"
+         data-cactus-src="{% static 'images/cactus.svg' %}"
+         data-bird-src="{% static 'images/bird.svg' %}">
+      <div class="sky-decoration cloud cloud-one"></div>
+      <div class="sky-decoration cloud cloud-two"></div>
+      <div id="dinosaur" class="dinosaur is-running" aria-hidden="true">
+        <img src="{% static 'images/dinosaur.svg' %}" alt="">
+      </div>
+      <div id="obstacle-layer" class="obstacle-layer" aria-hidden="true"></div>
+      <div id="ground" class="ground" aria-hidden="true"></div>
+      <div id="game-message" class="game-message">
+        <p class="message-title">Ready to run?</p>
+        <p>Press Space or ↑ to jump</p>
+        <button id="restart-button" class="restart-button" type="button">Start game</button>
+      </div>
+    </div>
+
+    <footer class="game-help">
+      <span><kbd>Space</kbd> / <kbd>↑</kbd> Jump</span>
+      <span><kbd>↓</kbd> Duck</span>
+      <span>Tap the game on mobile</span>
+    </footer>
+  </section>
+</main>
+{% endblock %}
