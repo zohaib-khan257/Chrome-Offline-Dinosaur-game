@@ -9,10 +9,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-only-change-me-before-deploying")
 DEBUG = os.environ.get("DJANGO_DEBUG", "true").lower() == "true"
-ALLOWED_HOSTS = ["*"
-    # host.strip()
-    # for host in os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1,chrome-offline-dinosaur-game-production.up.railway.app").split(",")
-    # if host.strip()
+
+# FIXED: this used to be hardcoded to ["*"] because the real list comprehension
+# was commented out. "*" means Django accepts ANY Host header — a real security
+# risk in production (host-header attacks, cache poisoning, etc).
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ.get(
+        "DJANGO_ALLOWED_HOSTS",
+        "localhost,127.0.0.1,chrome-offline-dinosaur-game-production.up.railway.app",
+    ).split(",")
+    if host.strip()
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -79,6 +86,8 @@ else:
         }
     }
 
+# Empty by default — fine for a game with no user signup, but if you add
+# accounts later, fill this back in with Django's default validators.
 AUTH_PASSWORD_VALIDATORS: list[dict[str, str]] = []
 
 LANGUAGE_CODE = "en-us"
